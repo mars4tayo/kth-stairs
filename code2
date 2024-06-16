@@ -2,26 +2,53 @@
 
 class Solution:
     def waysToReachStair(self, k):
+        # Handle base cases directly
         if k == 0:
-            return 2
+            return 2                                  # There are 2 ways to reach stair 0: start directly or jump from stair 2
         elif k == 1:
-            return 4
+            return 4                                  # There are 4 ways to reach stair 1: start directly, jump from stair 0, or jump from stair 3
         
-        # Initialize base cases
-        prev2 = 2  # Number of ways to reach stair 0
-        prev1 = 4  # Number of ways to reach stair 1
+        # Initialize variables to store number of ways to reach previous stairs
+        prev2 = 2                                      # Number of ways to reach stair 0
+        prev1 = 4                                      # Number of ways to reach stair 1
         
+        # Iterate from stair 2 to stair k
         for n in range(2, k + 1):
-            current = prev1 + prev2
-            prev2 = prev1
-            prev1 = current
+            current = prev1 + prev2                     # Calculate the number of ways to reach stair n
+            prev2 = prev1                               # Update prev2 to be the number of ways to reach stair n-1
+            prev1 = current                             # Update prev1 to be the number of ways to reach stair n
         
-        return prev1
+        return prev1                                    # Return the number of ways to reach stair k
 
 # Example usage:
 solution = Solution()
-print(solution.waysToReachStair(0))   # Output: 2
-print(solution.waysToReachStair(1))   # Output: 4
-print(solution.waysToReachStair(2))   # Output: 4
-print(solution.waysToReachStair(3))   # Output: 3
-print(solution.waysToReachStair(10))  # Output: 28
+print(solution.waysToReachStair(0))                     # Output: 2
+print(solution.waysToReachStair(1))                     # Output: 4
+print(solution.waysToReachStair(2))                     # Output: 4
+print(solution.waysToReachStair(3))                     # Output: 3
+print(solution.waysToReachStair(10))                    # Output: 28
+
+
+
+# Handle base cases directly:
+# If k is 0, return 2 (there are 2 ways to reach stair 0).
+# If k is 1, return 4 (there are 4 ways to reach stair 1).
+
+# Initialization:
+# Initialize prev2 to 2 (number of ways to reach stair 0).
+# Initialize prev1 to 4 (number of ways to reach stair 1).
+
+# Dynamic Programming Loop:
+# Iterate from stair 2 (n = 2) to stair k.
+# Calculate current as the sum of prev1 and prev2, which represents the number of ways to reach stair n.
+# Update prev2 to prev1 (number of ways to reach stair n-1).
+# Update prev1 to current (number of ways to reach stair n).
+
+# Return Result:
+# Return prev1, which now contains the number of ways to reach stair k.
+
+# Example Usage:
+# Create an instance of Solution.
+# Test the waysToReachStair method with different values of k and print the results to verify correctness.
+
+
