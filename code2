@@ -1,0 +1,27 @@
+#another approach to writing the code
+
+class Solution:
+    def waysToReachStair(self, k):
+        if k == 0:
+            return 2
+        elif k == 1:
+            return 4
+        
+        # Initialize base cases
+        prev2 = 2  # Number of ways to reach stair 0
+        prev1 = 4  # Number of ways to reach stair 1
+        
+        for n in range(2, k + 1):
+            current = prev1 + prev2
+            prev2 = prev1
+            prev1 = current
+        
+        return prev1
+
+# Example usage:
+solution = Solution()
+print(solution.waysToReachStair(0))   # Output: 2
+print(solution.waysToReachStair(1))   # Output: 4
+print(solution.waysToReachStair(2))   # Output: 4
+print(solution.waysToReachStair(3))   # Output: 3
+print(solution.waysToReachStair(10))  # Output: 28
