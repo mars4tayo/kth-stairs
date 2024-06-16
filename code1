@@ -1,27 +1,52 @@
-    c = 11
-    x = 15
-    a = [1, 5, 10, 10, 5, 1]
-
-    while c <= 1e9:
-        len_a = len(a)
-
-        for i in range(len_a):
-            ct[c + i] = a[i]
-
-        aa = [1]
-        for i in range(len_a - 1):
-            aa.append(a[i] + a[i + 1])
-        aa.append(1)
-
-        c += x
-        x = x * 2 + 1
-
-        a = aa
-
-    return ct.get(k, 0)
+class Solution:
+    def waysToReachStair(self, k):
+        if k == 0:
+            return 2
+        elif k == 1:
+            return 4
+c = 11                                # Initialize c to start calculating stair counts from 11
+x = 15                                # Initialize x as the increment value for c in each iteration
+a = [1, 5, 10, 10, 5, 1]              # Initialize coefficients for Pascal's triangle-like computation
+while c <= 1e9:                       # Loop until c exceeds 1 billion
+    len_a = len(a)                    # Determine the current length of array a
+    
+    for i in range(len_a):            # Iterate over each element in array a
+        ct[c + i] = a[i]              # Update dictionary ct with the value from array a at index c + i
+    aa = [1]                          # Start a new row in Pascal's triangle-like computation
+    for i in range(len_a - 1):        # Compute new coefficients for the next row
+        aa.append(a[i] + a[i + 1])    # Sum adjacent elements from array a
+    aa.append(1)                      # Complete the new row with 1
+    c += x                            # Increment c by x
+    x = x * 2 + 1                     # Update x exponentially for the next iteration
+    a = aa                            # Update array a to the new row of coefficients
+return ct.get(k, 0)                   # Return the number of ways to reach stair k from dictionary ct, or 0 if not found
 solution = Solution()
-print(solution.waysToReachStair(0)) # Should print: 2
-print(solution.waysToReachStair(1)) # Should print: 4
-print(solution.waysToReachStair(2)) # Should print: 4
-print(solution.waysToReachStair(3)) # Should print: 3
-print(solution.waysToReachStair(10)) # Example additional test case
+print(solution.waysToReachStair(0))   # Should print: 2
+print(solution.waysToReachStair(1))   # Should print: 4
+print(solution.waysToReachStair(2))   # Should print: 4
+print(solution.waysToReachStair(3))   # Should print: 3
+print(solution.waysToReachStair(10))  # Example additional test case
+
+
+# Explanation:
+# Initial Checks:
+# Directly return values for k = 0 and k = 1 as they are constant.
+
+# Main Calculation Loop:
+# Start with initial values of c, x, and a.
+# Use a dictionary ct to store the number of ways to reach each stair k.
+# Iteratively update ct with values calculated from array a.
+# Compute the next row of Pascal's triangle-like coefficients using aa.
+# Update c and x for the next iteration.
+
+# Return Result:
+# After the loop completes, return the number of ways to reach stair k from dictionary ct,
+# or 0 if k is not found.
+
+# Example Usage:
+# Demonstrate the usage of the Solution class by printing results for various test cases.
+# This consolidated version retains clarity and efficiency while ensuring correctness
+# in computing the number of ways Alice can reach any stair up to a very large number (1e9).
+# Each step is now explained with comments to clarify its purpose and functionality.
+# follow me @tayorealmusic
+
